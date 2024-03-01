@@ -53,6 +53,7 @@ export function createGettext(options: Partial<GetTextOptions> = {}) {
   };
 
   const translations = ref(normalizeTranslations(mergedOptions.translations));
+  const translationsNoSpaces = ref(normalizeTranslations(mergedOptions.translationsNoSpaces));
 
   const gettext: Language = reactive({
     available: mergedOptions.availableLanguages,
@@ -64,6 +65,14 @@ export function createGettext(options: Partial<GetTextOptions> = {}) {
       },
       set: (val: GetTextOptions["translations"]) => {
         translations.value = normalizeTranslations(val);
+      },
+    }),
+    translationsNoSpaces: computed({
+      get: () => {
+        return translationsNoSpaces.value;
+      },
+      set: (val: GetTextOptions["translationsNoSpaces"]) => {
+        translationsNoSpaces.value = normalizeTranslations(val);
       },
     }),
     current: mergedOptions.defaultLanguage,
