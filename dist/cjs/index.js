@@ -614,6 +614,7 @@ function createGettext(options) {
     });
     var mergedOptions = __assign(__assign({}, defaultOptions), options);
     var translations = vue.ref(normalizeTranslations(mergedOptions.translations));
+    var translationsNoSpaces = vue.ref(normalizeTranslations(mergedOptions.translationsNoSpaces));
     var gettext = vue.reactive({
         available: mergedOptions.availableLanguages,
         muted: mergedOptions.mutedLanguages,
@@ -624,6 +625,14 @@ function createGettext(options) {
             },
             set: function (val) {
                 translations.value = normalizeTranslations(val);
+            },
+        }),
+        translationsNoSpaces: vue.computed({
+            get: function () {
+                return translationsNoSpaces.value;
+            },
+            set: function (val) {
+                translationsNoSpaces.value = normalizeTranslations(val);
             },
         }),
         current: mergedOptions.defaultLanguage,
