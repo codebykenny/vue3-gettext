@@ -48,6 +48,7 @@ export type Language = UnwrapRef<{
   muted: GetTextOptions["mutedLanguages"];
   silent: GetTextOptions["silent"];
   translations: WritableComputedRef<GetTextOptions["translations"]>;
+  translationsNoSpaces: WritableComputedRef<GetTextOptions["translationsNoSpaces"]>;
   current: string;
   sourceCodeLanguage?: string; // if set, use it to calculate plural form when a msgid is not translated.
   $gettext: (msgid: string, parameters?: { [key: string]: string }, disableHtmlEscaping?: boolean) => string;
