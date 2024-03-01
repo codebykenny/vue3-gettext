@@ -26,6 +26,7 @@ const defaultOptions: GetTextOptions = {
   mutedLanguages: [],
   silent: false,
   translations: {},
+  translationsNoSpaces: {},
   setGlobalProperties: true,
   globalProperties: {
     language: ["$language"],

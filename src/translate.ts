@@ -53,7 +53,9 @@ const translate = (language: Language) => ({
     // So try `ll_CC` first, or the `ll` abbreviation which can be three-letter sometimes:
     // https://www.gnu.org/software/gettext/manual/html_node/Language-Codes.html#Language-Codes
     const pluginTranslations = language.translations;
+    const pluginTranslationsNoSpaces = language.translationsNoSpaces;
     const translations: LanguageData = pluginTranslations[languageKey] || pluginTranslations[languageKey.split("_")[0]];
+    const translationsNoSpaces: LanguageData = pluginTranslationsNoSpaces[languageKey] || pluginTranslationsNoSpaces[languageKey.split("_")[0]];
 
     if (!translations) {
       if (!silent) {
@@ -113,6 +115,15 @@ const translate = (language: Language) => ({
     };
 
     const translated = translations[msgid];
+
+    if (!translated) {
+      const msgIdNoSpaces = msgid.replace(/\s/g, "");
+      const translatedNoSpaces = translationsNoSpaces[msgIdNoSpaces];
+
+      if (translatedNoSpaces) {
+        return translateMsg(translatedNoSpaces, context);
+      }
+    }
     return translateMsg(translated, context);
   },
 

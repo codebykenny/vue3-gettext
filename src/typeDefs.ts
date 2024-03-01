@@ -29,6 +29,7 @@ export interface GetTextOptions {
   mutedLanguages: Array<string>;
   silent: boolean;
   translations: Translations;
+  translationsNoSpaces: Translations;
   setGlobalProperties: boolean;
   globalProperties: {
     language?: Array<string>;
