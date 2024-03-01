@@ -36,6 +36,7 @@ const translate = (language: Language) => ({
       return ""; // Allow empty strings.
     }
 
+    msgid = msgid.replace(/data-v-[0-9a-zA-Z]+=\"\"/g, ""); // remove vue data-v- attributes (scoped classes)
     const silent = languageKey ? language.silent || language.muted.indexOf(languageKey) !== -1 : false;
 
     // Default untranslated string, singular or plural.
@@ -55,7 +56,8 @@ const translate = (language: Language) => ({
     const pluginTranslations = language.translations;
     const pluginTranslationsNoSpaces = language.translationsNoSpaces;
     const translations: LanguageData = pluginTranslations[languageKey] || pluginTranslations[languageKey.split("_")[0]];
-    const translationsNoSpaces: LanguageData = pluginTranslationsNoSpaces[languageKey] || pluginTranslationsNoSpaces[languageKey.split("_")[0]];
+    const translationsNoSpaces: LanguageData =
+      pluginTranslationsNoSpaces[languageKey] || pluginTranslationsNoSpaces[languageKey.split("_")[0]];
 
     if (!translations) {
       if (!silent) {

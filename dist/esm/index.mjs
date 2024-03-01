@@ -285,6 +285,7 @@ var translate = function (language) { return ({
         if (!msgid) {
             return ""; // Allow empty strings.
         }
+        msgid = msgid.replace(/data-v-[0-9a-zA-Z]+=\"\"/g, ""); // remove vue data-v- attributes (scoped classes)
         var silent = languageKey ? language.silent || language.muted.indexOf(languageKey) !== -1 : false;
         // Default untranslated string, singular or plural.
         var noTransLangKey = languageKey; // if no translation, use current lang key to get plural text.(for compatibility)
